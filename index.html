@@ -4,8 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AriS — Links</title>
+<meta name="description" content="AriS 公式サイト。最新楽曲、配信リンク、SNS、ライブ配信情報、問い合わせ先をまとめています。">
+<link rel="canonical" href="https://aris040417.github.io/Aris-site/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AriS Official">
+<meta property="og:title" content="AriS — Links">
+<meta property="og:description" content="AriSの最新楽曲と公式リンクをまとめた公式ページ。">
+<meta property="og:url" content="https://aris040417.github.io/Aris-site/">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AriS — Links">
+<meta name="twitter:description" content="AriSの最新楽曲と公式リンクをまとめた公式ページ。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "AriS",
+  "url": "https://aris040417.github.io/Aris-site/",
+  "sameAs": [
+    "http://youtube.com/channel/UCkBIv56CIs7rqstj8mDWkJQ",
+    "https://www.instagram.com/aris_20040417",
+    "http://tiktok.com/@aris040417",
+    "http://x.com/higher26656657",
+    "https://www.tunecore.co.jp/artists/AriS",
+    "https://twitcasting.tv/"
+  ]
+}
+</script>
 <style>
   :root {
     --bg: #f8f7f5;
@@ -35,6 +62,15 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
+  #bg-motion-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+  }
 
   body::before {
     content: '';
@@ -44,6 +80,7 @@
     border-radius: 50%;
     background: radial-gradient(circle, #ede8dc 0%, transparent 68%);
     pointer-events: none; z-index: 0;
+    animation: floatOrbA 18s ease-in-out infinite alternate;
   }
   body::after {
     content: '';
@@ -53,6 +90,7 @@
     border-radius: 50%;
     background: radial-gradient(circle, #e8e2d8 0%, transparent 68%);
     pointer-events: none; z-index: 0;
+    animation: floatOrbB 22s ease-in-out infinite alternate;
   }
 
   .container {
@@ -212,6 +250,7 @@
     padding-left: 4px;
     box-shadow: 0 4px 18px rgba(0,0,0,0.16);
     transition: transform 0.22s, background 0.22s;
+    animation: pulseSoft 2.4s ease-in-out infinite;
   }
   .latest-song-card:hover .play-btn { transform: scale(1.1); background: #fff; }
 
@@ -258,6 +297,8 @@
     box-shadow: var(--shadow);
     margin-bottom: 10px;
     transition: all 0.22s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
   .link-item:last-child { margin-bottom: 0; }
   .link-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); border-color: var(--border-strong); }
@@ -330,14 +371,43 @@
     animation: fadeUp 0.7s 0.6s ease both;
   }
 
+  .motion-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  .motion-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
   /* ---- ANIMATIONS ---- */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes floatOrbA {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(-18px, 16px, 0) scale(1.05); }
+  }
+  @keyframes floatOrbB {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    100% { transform: translate3d(20px, -14px, 0) scale(1.06); }
+  }
+  @keyframes pulseSoft {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
   @keyframes equalize {
     from { transform: scaleY(0.3); }
     to { transform: scaleY(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 
   ::-webkit-scrollbar { width: 4px; }
@@ -363,6 +433,7 @@
 </style>
 </head>
 <body>
+<canvas id="bg-motion-canvas" aria-hidden="true"></canvas>
 <div class="container">
 
   <!-- HEADER -->
@@ -648,6 +719,221 @@
   }
   }
 
+  // target="_blank" の外部リンクに安全属性を補完
+  document.querySelectorAll('a[target="_blank"]').forEach((a) => {
+    const currentRel = (a.getAttribute("rel") || "").trim();
+    const relTokens = new Set(currentRel ? currentRel.split(/\s+/) : []);
+    relTokens.add("noopener");
+    relTokens.add("noreferrer");
+    a.setAttribute("rel", Array.from(relTokens).join(" "));
+  });
+
+  function initMotionReveal() {
+    const targets = document.querySelectorAll(".header, .latest-song-wrap, .now-playing, .links-group, .contact-card, .footer");
+    if (!("IntersectionObserver" in window)) return;
+
+    targets.forEach((el) => el.classList.add("motion-reveal"));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    targets.forEach((el) => observer.observe(el));
+  }
+
+  function initCardTilt() {
+    const cards = document.querySelectorAll(".link-item, .latest-song-card");
+    cards.forEach((card) => {
+      const maxTilt = 3.5;
+      card.addEventListener("mousemove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const cx = event.clientX - rect.left;
+        const cy = event.clientY - rect.top;
+        const rx = ((cy / rect.height) - 0.5) * -maxTilt;
+        const ry = ((cx / rect.width) - 0.5) * maxTilt;
+        card.style.transform = `translateY(-2px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+    });
+  }
+
+  function initBackgroundMotion() {
+    const canvas = document.getElementById("bg-motion-canvas");
+    if (!canvas || !canvas.getContext) return;
+
+    const ctx = canvas.getContext("2d");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let width = 0;
+    let height = 0;
+    let rafId = null;
+    const topMin = 0.03;
+    const topMax = 0.34;
+    const palette = [
+      "rgba(255,255,255,0.44)",
+      "rgba(240,243,248,0.36)",
+      "rgba(214,220,228,0.30)",
+      "rgba(168,176,186,0.28)",
+      "rgba(96,102,110,0.23)"
+    ];
+
+    const shapes = Array.from({ length: 14 }, (_, i) => ({
+      w: 84 + Math.random() * 170,
+      h: 12 + Math.random() * 22,
+      xPx: 0,
+      yPx: 0,
+      vx: 0,
+      speedScale: 0.92 + Math.random() * 0.2,
+      squashX: 1,
+      squashY: 1,
+      /** 壁に当たった瞬間の潰れ 0..1（減衰で自然に戻る） */
+      squeeze: 0,
+      c: palette[i % palette.length]
+    }));
+
+    function placeInBand(s) {
+      const bandTopPx = topMin * height;
+      const bandBottomPx = topMax * height;
+      const minY = bandTopPx + s.h / 2;
+      const maxY = bandBottomPx - s.h / 2;
+      const minX = s.w / 2;
+      const maxX = width - s.w / 2;
+      s.xPx = minX + Math.random() * Math.max(maxX - minX, 1);
+      s.yPx = minY + Math.random() * Math.max(maxY - minY, 1);
+    }
+
+    function setHorizontalVelocity(s) {
+      const span = Math.max(width - s.w, 80);
+      const speed = (span / 2) * s.speedScale;
+      const dir = Math.random() > 0.5 ? 1 : -1;
+      s.vx = dir * speed;
+    }
+
+    let bgPhysicsReady = false;
+
+    function syncPhysicsAfterResize() {
+      shapes.forEach((s) => {
+        const bandTopPx = topMin * height;
+        const bandBottomPx = topMax * height;
+        const minY = bandTopPx + s.h / 2;
+        const maxY = bandBottomPx - s.h / 2;
+        const minX = s.w / 2;
+        const maxX = width - s.w / 2;
+
+        if (!bgPhysicsReady) {
+          placeInBand(s);
+          setHorizontalVelocity(s);
+        } else {
+          s.xPx = Math.min(maxX, Math.max(minX, s.xPx));
+          s.yPx = Math.min(maxY, Math.max(minY, s.yPx));
+        }
+      });
+      bgPhysicsReady = true;
+    }
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      syncPhysicsAfterResize();
+    }
+
+    function drawStatic() {
+      ctx.clearRect(0, 0, width, height);
+      shapes.forEach((s) => {
+        ctx.fillStyle = s.c;
+        ctx.fillRect(s.xPx - s.w / 2, s.yPx - s.h / 2, s.w, s.h);
+      });
+    }
+
+    function drawShape(shape) {
+      const w = shape.w * shape.squashX;
+      const h = shape.h * shape.squashY;
+      const r = Math.min(h * 0.48, w * 0.26);
+      ctx.fillStyle = shape.c;
+      ctx.save();
+      ctx.translate(shape.xPx, shape.yPx);
+      if (typeof ctx.roundRect === "function") {
+        ctx.beginPath();
+        ctx.roundRect(-w / 2, -h / 2, w, h, r);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-w / 2, -h / 2, w, h);
+      }
+      ctx.restore();
+    }
+
+    let lastTime = performance.now();
+    function animate(nowMs) {
+      const dt = Math.min((nowMs - lastTime) / 1000, 0.05);
+      lastTime = nowMs;
+      ctx.clearRect(0, 0, width, height);
+
+      shapes.forEach((s) => {
+        const decay = Math.exp(-dt * 10);
+        s.squeeze *= decay;
+
+        const impactBlend = Math.min(1, Math.abs(s.vx) / 520);
+        s.squashX = 1 - 0.34 * s.squeeze * (0.65 + 0.35 * impactBlend);
+        s.squashY = 1 + 0.18 * s.squeeze * (0.65 + 0.35 * impactBlend);
+
+        s.xPx += s.vx * dt;
+
+        const minX = s.w / 2;
+        const maxX = width - s.w / 2;
+
+        let hit = false;
+        if (s.xPx <= minX) {
+          s.xPx = minX;
+          if (s.vx < 0) {
+            s.vx *= -1;
+            hit = true;
+          }
+        } else if (s.xPx >= maxX) {
+          s.xPx = maxX;
+          if (s.vx > 0) {
+            s.vx *= -1;
+            hit = true;
+          }
+        }
+
+        if (hit) {
+          const strength = Math.min(1, Math.abs(s.vx) / 420);
+          s.squeeze = Math.max(s.squeeze, 0.55 + 0.45 * strength);
+        }
+
+        drawShape(s);
+      });
+
+      rafId = window.requestAnimationFrame(animate);
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    if (prefersReducedMotion) {
+      drawStatic();
+      return;
+    }
+
+    rafId = window.requestAnimationFrame(animate);
+    window.addEventListener("pagehide", () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+    }, { once: true });
+  }
+
+  initBackgroundMotion();
+  initMotionReveal();
+  initCardTilt();
   setupLatestSong();
 </script>
 </body>
