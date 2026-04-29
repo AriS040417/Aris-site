@@ -271,6 +271,16 @@
     border: 1px solid var(--border);
     transition: background 0.22s;
   }
+  .link-icon svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+  .link-item[data-platform="youtube"] .link-icon { color: #ff0033; }
+  .link-item[data-platform="instagram"] .link-icon { color: #c13584; }
+  .link-item[data-platform="tiktok"] .link-icon { color: #111111; }
+  .link-item[data-platform="x"] .link-icon { color: #111111; }
+  .link-item[data-platform="twitcasting"] .link-icon { color: #2f7be8; }
   .link-text { flex: 1; min-width: 0; }
   .link-name { font-size: 14px; font-weight: 500; display: block; margin-bottom: 3px; }
   .link-desc { font-size: 11px; color: var(--muted); display: block; line-height: 1.4; }
@@ -418,7 +428,11 @@
       <span class="link-arrow">›</span>
     </a>
     <a href="http://youtube.com/channel/UCkBIv56CIs7rqstj8mDWkJQ" target="_blank" class="link-item" data-platform="youtube">
-      <div class="link-icon">▶</div>
+      <div class="link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12c0 2 .2 4 .5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.3-1.8.5-3.8.5-5.8s-.2-4-.5-5.8ZM9.7 15.7V8.3L16 12l-6.3 3.7Z"/>
+        </svg>
+      </div>
       <div class="link-text">
         <span class="link-name">YouTube</span>
         <span class="link-desc">弾き語り Shorts・リリックビデオ</span>
@@ -431,7 +445,11 @@
   <div class="links-group" style="animation-delay:0.3s">
     <div class="section-label">Social</div>
     <a href="https://www.instagram.com/aris_20040417" target="_blank" class="link-item" data-platform="instagram">
-      <div class="link-icon">📸</div>
+      <div class="link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 1.9A3.9 3.9 0 0 0 3.9 7.8v8.4a3.9 3.9 0 0 0 3.9 3.9h8.4a3.9 3.9 0 0 0 3.9-3.9V7.8a3.9 3.9 0 0 0-3.9-3.9H7.8Zm9.1 1.4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.9A3.1 3.1 0 1 0 12 15a3.1 3.1 0 0 0 0-6.2Z"/>
+        </svg>
+      </div>
       <div class="link-text">
         <span class="link-name">Instagram</span>
         <span class="link-desc">制作中の楽曲・最新リリース情報</span>
@@ -439,7 +457,11 @@
       <span class="link-arrow">›</span>
     </a>
     <a href="http://tiktok.com/@aris040417" target="_blank" class="link-item" data-platform="tiktok">
-      <div class="link-icon">🎬</div>
+      <div class="link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.5 3h2.7a4.9 4.9 0 0 0 3.8 3.9v2.8a7.7 7.7 0 0 1-3.8-1v6.2a6 6 0 1 1-6-6c.4 0 .8 0 1.1.1v2.9a3.1 3.1 0 1 0 2.2 3V3Z"/>
+        </svg>
+      </div>
       <div class="link-text">
         <span class="link-name">TikTok</span>
         <span class="link-desc">弾き語り動画</span>
@@ -447,7 +469,11 @@
       <span class="link-arrow">›</span>
     </a>
     <a href="http://x.com/higher26656657" target="_blank" class="link-item" data-platform="x">
-      <div class="link-icon">𝕏</div>
+      <div class="link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-5-6.5L6.3 22H3.2l7.3-8.4L.8 2h6.4l4.5 6 5.2-6Z"/>
+        </svg>
+      </div>
       <div class="link-text">
         <span class="link-name">X (Twitter)</span>
         <span class="link-desc">日々のつぶやき</span>
@@ -460,7 +486,11 @@
   <div class="links-group" style="animation-delay:0.4s">
     <div class="section-label">Live</div>
     <a href="http://tiktok.com/@aris040417" target="_blank" class="link-item" data-platform="tiktok">
-      <div class="link-icon">🎬</div>
+      <div class="link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.5 3h2.7a4.9 4.9 0 0 0 3.8 3.9v2.8a7.7 7.7 0 0 1-3.8-1v6.2a6 6 0 1 1-6-6c.4 0 .8 0 1.1.1v2.9a3.1 3.1 0 1 0 2.2 3V3Z"/>
+        </svg>
+      </div>
       <div class="link-text">
         <span class="link-name">TikTok LIVE</span>
         <span class="link-desc">不定期でライブ配信中</span>
@@ -468,7 +498,11 @@
       <span class="link-arrow">›</span>
     </a>
     <a href="https://twitcasting.tv/" target="_blank" class="link-item" data-platform="twitcasting">
-      <div class="link-icon">📡</div>
+      <div class="link-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3a1 1 0 0 1 1 1v1.1a7 7 0 0 1 5.9 5.9H20a1 1 0 1 1 0 2h-1.1a7 7 0 0 1-5.9 5.9V20a1 1 0 1 1-2 0v-1.1A7 7 0 0 1 5.1 13H4a1 1 0 1 1 0-2h1.1A7 7 0 0 1 11 5.1V4a1 1 0 0 1 1-1Zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 2.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6Z"/>
+        </svg>
+      </div>
       <div class="link-text">
         <span class="link-name">ツイキャス</span>
         <span class="link-desc">不定期でライブ配信中</span>
@@ -488,7 +522,7 @@
       <div class="contact-icon">✉</div>
       <div>
         <div class="contact-label">Booking &amp; Business</div>
-        <a href="mailto:jinquxiangtai311@gmail.com" class="contact-email">jinquxiangtai311@gmail.com</a>
+        <a href="mailto:jinquxiangtai311@gmail.com?subject=AriS%20%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B&body=%E4%BE%9D%E9%A0%BC%E7%A8%AE%E5%88%A5%EF%BC%88%E5%87%BA%E6%BC%94%2F%E5%88%B6%E4%BD%9C%2F%E3%82%B3%E3%83%A9%E3%83%9C%E3%81%AA%E3%81%A9%EF%BC%89%3A%0A%E5%B8%8C%E6%9C%9B%E6%97%A5%E7%A8%8B%EF%BC%88%E5%80%99%E8%A3%9C%E3%82%92%E8%A4%87%E6%95%B0%E5%8F%AF%EF%BC%89%3A%0A%E4%BA%88%E7%AE%97%E3%83%BB%E6%9D%A1%E4%BB%B6%3A%0A%E8%A9%B3%E7%B4%B0%3A%0A" class="contact-email">jinquxiangtai311@gmail.com</a>
       </div>
     </div>
   </div>
@@ -498,16 +532,73 @@
 
 <script>
   // =====================================================
-  // 🎵 最新楽曲の更新方法：
-  //    LATEST_YOUTUBE_URL の値を新しいYouTube URLに
-  //    書き換えるだけで、サムネが自動で切り替わります。
+  // 🎵 運用設定（この3項目だけ触ればOK）
+  // 1) AUTO_LYRIC_UPDATE: trueで自動更新ON
+  // 2) YOUTUBE_CHANNEL_ID: 自分のチャンネルID
+  // 3) LATEST_YOUTUBE_URL: 自動取得失敗時の手動fallback
   // =====================================================
+  const AUTO_LYRIC_UPDATE = true;
+  const YOUTUBE_CHANNEL_ID = "UCkBIv56CIs7rqstj8mDWkJQ";
   const LATEST_YOUTUBE_URL = "https://youtu.be/GUQmNnjgEE0";
 
+  async function getLatestLyricVideoUrlFromFeed(channelId) {
+    if (!channelId) return null;
+    const feedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${encodeURIComponent(channelId)}`;
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`;
+
+    const response = await fetch(proxyUrl, { cache: "no-store" });
+    if (!response.ok) throw new Error("feed fetch failed");
+
+    const xmlText = await response.text();
+    const xml = new DOMParser().parseFromString(xmlText, "application/xml");
+    const entries = Array.from(xml.getElementsByTagName("entry"));
+
+    // タイトルに Lyric を含む通常動画を優先（Shorts除外）
+    const lyricEntry = entries.find((entry) => {
+      const title = (entry.getElementsByTagName("title")[0]?.textContent || "").toLowerCase();
+      const link = entry.getElementsByTagName("link")[0]?.getAttribute("href") || "";
+      const isLyric = title.includes("lyric");
+      const isShorts = title.includes("shorts") || link.includes("/shorts/");
+      return isLyric && !isShorts;
+    });
+
+    if (!lyricEntry) return null;
+    return lyricEntry.getElementsByTagName("link")[0]?.getAttribute("href") || null;
+  }
+
   function extractYouTubeId(url) {
+    if (!url || typeof url !== "string") return null;
+
+    // URL API で主要パターンを安全に判定
+    try {
+      const parsed = new URL(url.trim());
+      const host = parsed.hostname.replace(/^www\./, "");
+
+      if (host === "youtu.be") {
+        const idFromPath = parsed.pathname.split("/").filter(Boolean)[0];
+        if (/^[\w-]{11}$/.test(idFromPath)) return idFromPath;
+      }
+
+      if (host === "youtube.com" || host === "m.youtube.com") {
+        if (parsed.pathname === "/watch") {
+          const idFromQuery = parsed.searchParams.get("v");
+          if (/^[\w-]{11}$/.test(idFromQuery || "")) return idFromQuery;
+        }
+
+        const pathParts = parsed.pathname.split("/").filter(Boolean);
+        if (pathParts[0] === "shorts" || pathParts[0] === "embed") {
+          const idFromPath = pathParts[1];
+          if (/^[\w-]{11}$/.test(idFromPath || "")) return idFromPath;
+        }
+      }
+    } catch (_) {
+      // そのまま regex fallback へ
+    }
+
+    // URL文字列直貼り向け fallback
     const patterns = [
       /youtu\.be\/([\w-]{11})/,
-      /youtube\.com\/watch\?v=([\w-]{11})/,
+      /youtube\.com\/watch\?(?:.*&)?v=([\w-]{11})/,
       /youtube\.com\/shorts\/([\w-]{11})/,
       /youtube\.com\/embed\/([\w-]{11})/,
     ];
@@ -518,18 +609,46 @@
     return null;
   }
 
-  const videoId = extractYouTubeId(LATEST_YOUTUBE_URL);
+  async function resolveLatestSongUrl() {
+    if (!AUTO_LYRIC_UPDATE) return LATEST_YOUTUBE_URL;
+    try {
+      const autoUrl = await getLatestLyricVideoUrlFromFeed(YOUTUBE_CHANNEL_ID);
+      return autoUrl || LATEST_YOUTUBE_URL;
+    } catch (_) {
+      return LATEST_YOUTUBE_URL;
+    }
+  }
+
+  async function setupLatestSong() {
+    const latestUrl = await resolveLatestSongUrl();
+    const videoId = extractYouTubeId(latestUrl);
+  const thumb = document.getElementById("latest-thumb");
+  const link  = document.getElementById("latest-song-link");
+
   if (videoId) {
-    const thumb = document.getElementById("latest-thumb");
-    const link  = document.getElementById("latest-song-link");
-    link.href = LATEST_YOUTUBE_URL;
-    // maxresdefault → fallback to hqdefault
+    link.href = latestUrl;
+
+    // maxresdefault → hqdefault → mqdefault の順に段階フォールバック
     thumb.src = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     thumb.onerror = function() {
-      this.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      if (this.src.includes("/maxresdefault.jpg")) {
+        this.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+        return;
+      }
+      if (this.src.includes("/hqdefault.jpg")) {
+        this.src = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+        return;
+      }
       this.onerror = null;
     };
+  } else {
+    // 不正URL時もカード表示を壊さない
+    link.href = "https://www.youtube.com/";
+    thumb.alt = "最新楽曲（URL設定を確認してください）";
   }
+  }
+
+  setupLatestSong();
 </script>
 </body>
 </html>
